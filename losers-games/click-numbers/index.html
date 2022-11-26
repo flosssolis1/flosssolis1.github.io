@@ -1,0 +1,126 @@
+<div id="parent">
+  <table id="field"></table>
+</div>
+
+<style>
+  #parent {
+    text-align: center;
+  }
+  #field {
+    display: inline-block;
+  }
+
+  #field td {
+    padding: 20px;
+    border: 1px solid black;
+    cursor: pointer;
+    text-align: center;
+  }
+</style>
+
+<script>
+  let field = document.querySelector("#field");
+  start(7);
+
+  function start(size) {
+    activate(build(field, prepare(size)), size);
+  }
+
+  function build(field, arr) {
+    field.textContent = "";
+    let cells = [];
+
+    for (let sub of arr) {
+      let tr = document.createElement("tr");
+
+      for (let num of sub) {
+        let td = document.createElement("td");
+        td.textContent = num;
+        tr.appendChild(td);
+
+        cells.push(td);
+      }
+
+      field.appendChild(tr);
+    }
+
+    return cells;
+  }
+
+  function getRandomColor() {
+    var letters = "0123456789ABCDEF";
+    var color = "#";
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  function activate(cells, size) {
+    let counter = 1;
+
+    for (let cell of cells) {
+      cell.addEventListener("click", function (e) {
+        if (this.textContent == counter) {
+          e.target.style.background = getRandomColor();
+
+          if (counter == size * size) {
+            document.body.innerText =
+              "теперь снова иди на 5 этаж и следуй указаниям ботти ^^. и не забудь ему написать как спустишься";
+          }
+
+          counter++;
+        }
+      });
+    }
+  }
+
+  function prepare(size) {
+    let arr = [];
+
+    arr = range(size * size);
+    arr = shuffle(arr);
+    arr = chunk(arr, size);
+
+    return arr;
+  }
+
+  function range(count) {
+    let arr = [];
+
+    for (let i = 1; i <= count; i++) {
+      arr.push(i);
+    }
+
+    return arr;
+  }
+
+  function shuffle(arr) {
+    let result = [];
+    let length = arr.length;
+
+    for (let i = 0; i < length; i++) {
+      let random = getRandomInt(0, arr.length - 1);
+      let elem = arr.splice(random, 1)[0];
+      result.push(elem);
+    }
+
+    return result;
+  }
+
+  function chunk(arr, n) {
+    let result = [];
+    let count = Math.ceil(arr.length / n);
+
+    for (let i = 0; i < count; i++) {
+      let elems = arr.splice(0, n);
+      result.push(elems);
+    }
+
+    return result;
+  }
+
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+</script>
