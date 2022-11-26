@@ -28,6 +28,13 @@ function checkForMatch() {
   let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
 
   isMatch ? disableCards() : unflipCards();
+
+  const localCards = document.querySelectorAll('.memory-card');
+
+  if (Array.from(localCards).every(card => card.classList.contains('.flip'))) {
+    console.log('done')
+    document.body.innerText = 'теперь иди на 7 этаж, пиши в бота как доберешься'
+  }
 }
 
 function disableCards() {
