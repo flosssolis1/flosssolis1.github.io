@@ -53,6 +53,7 @@ export function Board(props) {
 
   useEffect(() => {
     if (score >= 10) {
+      
       setShowWin(true);
     }
   }, [score, setShowWin]);
