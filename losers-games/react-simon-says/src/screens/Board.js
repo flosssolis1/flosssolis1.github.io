@@ -52,7 +52,7 @@ export function Board(props) {
   );
 
   useEffect(() => {
-    if (score >= 1) {
+    if (score >= 10) {
       setShowWin(true);
     }
   }, [score, setShowWin]);
@@ -61,7 +61,7 @@ export function Board(props) {
     <Shell>
       {showWin && (
         <CenterOverlay p={2}>
-          <h4>теперь иди на 3 этаж, пиши в бота что-нибудь</h4>
+          <h4>теперь иди на 3 этаж, потом пиши в бота что-нибудь</h4>
         </CenterOverlay>
       )}
       {!showWin && gameOver && (
