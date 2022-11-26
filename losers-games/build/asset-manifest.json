@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/losers-games/static/css/main.073c9b0a.css",
-    "main.js": "/losers-games/static/js/main.f9a4a257.js",
-    "static/js/787.28cb0dcd.chunk.js": "/losers-games/static/js/787.28cb0dcd.chunk.js",
-    "index.html": "/losers-games/index.html",
-    "main.073c9b0a.css.map": "/losers-games/static/css/main.073c9b0a.css.map",
-    "main.f9a4a257.js.map": "/losers-games/static/js/main.f9a4a257.js.map",
-    "787.28cb0dcd.chunk.js.map": "/losers-games/static/js/787.28cb0dcd.chunk.js.map"
+    "main.css": "./static/css/main.073c9b0a.css",
+    "main.js": "./static/js/main.31f99b7d.js",
+    "static/js/787.28cb0dcd.chunk.js": "./static/js/787.28cb0dcd.chunk.js",
+    "index.html": "./index.html",
+    "main.073c9b0a.css.map": "./static/css/main.073c9b0a.css.map",
+    "main.31f99b7d.js.map": "./static/js/main.31f99b7d.js.map",
+    "787.28cb0dcd.chunk.js.map": "./static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.f9a4a257.js"
+    "static/js/main.31f99b7d.js"
   ]
 }
