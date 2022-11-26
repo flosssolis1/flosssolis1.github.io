@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { connect, shallowEqual, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Flex } from "reflexbox/styled-components";
@@ -21,6 +21,8 @@ export function Board(props) {
     match,
     pads,
   } = useSelector((state) => state, shallowEqual);
+
+  const [showWin, setShowWin] = useState(false);
 
   const startMatch = useCallback(() => {
     actions.startGame();
@@ -49,39 +51,52 @@ export function Board(props) {
     [actions, match]
   );
 
+  useEffect(() => {
+    if (score >= 1) {
+      setShowWin(true);
+    }
+  }, [score, setShowWin]);
+
   return (
     <Shell>
-      {gameOver && (
+      {showWin && (
+        <CenterOverlay p={2}>
+          <h4>теперь иди на 3 этаж, пиши в бота что-нибудь</h4>
+        </CenterOverlay>
+      )}
+      {!showWin && gameOver && (
         <CenterOverlay p={2}>
           <h2>SCORE {score}</h2>
           <h3>HIGH SCORE {highscore}</h3>
           <Button onClick={startMatch}>Try again</Button>
         </CenterOverlay>
       )}
-      <GrayScale disabled={!gameOver}>
-        <Game disbledPointer={singing || gameOver}>
-          <Flex align="center" justify="center">
-            {pads.slice(0, 2).map((pad, i) => (
-              <Pads
-                key={i}
-                pad={pad}
-                onClick={() => onPadClick({ id: pad.id })}
-              />
-            ))}
-          </Flex>
-          <Score length={score?.toString().length}>{score}</Score>
-          <Flex align="center" justify="center">
-            {pads.slice(2, 4).map((pad, i) => (
-              <Pads
-                key={i}
-                pad={pad}
-                onClick={() => onPadClick({ id: pad.id })}
-              />
-            ))}
-          </Flex>
-        </Game>
-      </GrayScale>
-      <Player />
+      {!showWin && (
+        <GrayScale disabled={!gameOver}>
+          <Game disbledPointer={singing || gameOver}>
+            <Flex align="center" justify="center">
+              {pads.slice(0, 2).map((pad, i) => (
+                <Pads
+                  key={i}
+                  pad={pad}
+                  onClick={() => onPadClick({ id: pad.id })}
+                />
+              ))}
+            </Flex>
+            <Score length={score?.toString().length}>{score}</Score>
+            <Flex align="center" justify="center">
+              {pads.slice(2, 4).map((pad, i) => (
+                <Pads
+                  key={i}
+                  pad={pad}
+                  onClick={() => onPadClick({ id: pad.id })}
+                />
+              ))}
+            </Flex>
+          </Game>
+        </GrayScale>
+      )}
+      {!showWin && <Player />}
     </Shell>
   );
 }
